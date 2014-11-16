@@ -79,7 +79,7 @@ main (int argc, char* argv[]){
 
   for (int i = 0; i < num_threads; i++) {
     index[i] = i;
-    pthread_create(&thrd[i], NULL, &thread, (void*) (index[i]));
+    pthread_create(&thrd[i], NULL, thread, (void*) &(index[i]));
   }
 
   for(int i = 0; i < num_threads; i++) {
