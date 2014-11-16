@@ -116,7 +116,7 @@ void *thread (void * args) {
       key = rnum % RAND_NUM_UPPER_BOUND;
 
       //sychronize here
-      __transaction atomic { 
+      __transaction_atomic { 
         // if this sample has not been counted before
         if (!(s = h.lookup(key))){
     
