@@ -4,6 +4,7 @@
 
 #include "defs.h"
 #include "hash.h"
+#include "pthread.h"
 
 #define SAMPLES_TO_COLLECT   10000000
 #define RAND_NUM_UPPER_BOUND   100000
