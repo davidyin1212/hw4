@@ -46,8 +46,8 @@ class sample {
 // the element and key value here: element is "class sample" and
 // key value is "unsigned".  
 hash<sample,unsigned> h;
-
-int  
+void *thread(void *args);
+ 
 main (int argc, char* argv[]){
 
   // Print out team information
@@ -78,7 +78,7 @@ main (int argc, char* argv[]){
 
   for (int i = 0; i < num_threads; i++) {
     index[i] = i;
-    pthread_create(&thrd[i], NULL, thread, (void*) &(index[i]));
+    pthread_create(&thrd[i], NULL, &thread, (void*) &(index[i]));
   }
 
   for(int i = 0; i < num_threads; i++) {
