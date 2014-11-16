@@ -47,7 +47,7 @@ class sample {
 // the element and key value here: element is "class sample" and
 // key value is "unsigned".  
 hash<sample,unsigned> h;
-void thread(void *args);
+void *thread(void *args);
  
 main (int argc, char* argv[]){
 
@@ -79,7 +79,7 @@ main (int argc, char* argv[]){
 
   for (int i = 0; i < num_threads; i++) {
     index[i] = i;
-    pthread_create(&thrd[i], NULL, thread, (void*) &(index[i]));
+    pthread_create(&thrd[i], NULL, &thread, (void*) &(index[i]));
   }
 
   for(int i = 0; i < num_threads; i++) {
@@ -91,7 +91,7 @@ main (int argc, char* argv[]){
   h.print();
 }
 
-void thread (void * args) {
+void *thread (void * args) {
   int slice = *((int *)args);
   int from = (slice*SAMPLES_TO_COLLECT)/num_threads;
   int to = ((slice+1)*SAMPLES_TO_COLLECT)/num_threads;
