@@ -48,6 +48,7 @@ class sample {
 // key value is "unsigned".  
 hash<sample,unsigned> h;
 void *thread(void *args);
+pthread_mutex_t mutex1 = PTHREAD_MUTEX_INITIALIZER;
  
 main (int argc, char* argv[]){
 
@@ -115,6 +116,8 @@ void *thread (void * args) {
       // force the sample to be within the range of 0..RAND_NUM_UPPER_BOUND-1
       key = rnum % RAND_NUM_UPPER_BOUND;
 
+      //lock here
+      pthread_mutex_lock(&mutex1);
       // if this sample has not been counted before
       if (!(s = h.lookup(key))){
   
@@ -125,6 +128,7 @@ void *thread (void * args) {
 
       // increment the count for the sample
       s->count++;
+      pthread_mutex_unlock(&mutex1);
     }
   }
   return NULL;
