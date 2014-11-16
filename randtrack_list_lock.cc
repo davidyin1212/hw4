@@ -48,7 +48,7 @@ class sample {
 // key value is "unsigned".  
 hash<sample,unsigned> h;
 void *thread(void *args);
-pthread_mutex_t mutex_list[RAND_NUM_UPPER_BOUND] = {[0 ... RAND_NUM_UPPER_BOUND] = PTHREAD_MUTEX_INITIALIZER};
+pthread_mutex_t mutex_list[RAND_NUM_UPPER_BOUND];
  
 main (int argc, char* argv[]){
 
@@ -74,6 +74,10 @@ main (int argc, char* argv[]){
 
   pthread_t thrd[num_threads];
   int index[num_threads];
+  //intialize mutex_list
+  for (int i = 0; i < RAND_NUM_UPPER_BOUND; i++) {
+    mutex_list[i] = PTHREAD_MUTEX_INITIALIZER;
+  }
   // initialize a 16K-entry (2**14) hash of empty lists
   h.setup(14);
 
