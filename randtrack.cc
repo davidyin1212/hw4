@@ -14,11 +14,11 @@
  * Please fill in the following team struct 
  */
 team_t team = {
-    "Team Name",                  /* Team name */
+    "Team UNO",                  /* Team name */
 
-    "AAA BBB",                    /* First member full name */
-    "9999999999",                 /* First member student number */
-    "AAABBB@CCC",                 /* First member email address */
+    "David Yin",                    /* First member full name */
+    "998270767",                 /* First member student number */
+    "zhiwen.yin@utoronto.ca",                 /* First member email address */
 
     "",                           /* Second member full name */
     "",                           /* Second member student number */
@@ -74,19 +74,41 @@ main (int argc, char* argv[]){
   sscanf(argv[1], " %d", &num_threads); // not used in this single-threaded version
   sscanf(argv[2], " %d", &samples_to_skip);
 
+  pthread_t thrd[num_threads];
+  int index[num_threads];
+  
   // initialize a 16K-entry (2**14) hash of empty lists
   h.setup(14);
+
+  for (int i = 0; i < num_threads; i++) {
+    index[i] = i;
+    pthread_create(&thrd[i], NULL, thread, (void*) &(index[i]));
+  }
+
+  for(int i = 0; i < num_threads; i++) {
+    pthread_join(thrd[i], NULL);
+  }
+
+
+  // print a list of the frequency of all samples
+  h.print();
+}
+
+void thread (void * args) {
+  int slice = *((int *)args)
+  int from = (slice*SAMPLES_TO_COLLECT)/num_threads;
+  int to = ((slice+1)*SAMPLES_TO_COLLECT)/num_threads;
 
   // process streams starting with different initial numbers
   for (i=0; i<NUM_SEED_STREAMS; i++){
     rnum = i;
 
     // collect a number of samples
-    for (j=0; j<SAMPLES_TO_COLLECT; j++){
+    for (j=from; j<to; j++){
 
       // skip a number of samples
       for (k=0; k<samples_to_skip; k++){
-	rnum = rand_r((unsigned int*)&rnum);
+        rnum = rand_r((unsigned int*)&rnum);
       }
 
       // force the sample to be within the range of 0..RAND_NUM_UPPER_BOUND-1
@@ -94,17 +116,14 @@ main (int argc, char* argv[]){
 
       // if this sample has not been counted before
       if (!(s = h.lookup(key))){
-	
-	// insert a new element for it into the hash table
-	s = new sample(key);
-	h.insert(s);
+  
+        // insert a new element for it into the hash table
+        s = new sample(key);
+        h.insert(s);
       }
 
       // increment the count for the sample
       s->count++;
     }
   }
-
-  // print a list of the frequency of all samples
-  h.print();
 }
