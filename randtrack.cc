@@ -49,10 +49,6 @@ hash<sample,unsigned> h;
 
 int  
 main (int argc, char* argv[]){
-  int i,j,k;
-  int rnum;
-  unsigned key;
-  sample *s;
 
   // Print out team information
   printf( "Team Name: %s\n", team.team );
@@ -98,6 +94,10 @@ void thread (void * args) {
   int slice = *((int *)args)
   int from = (slice*SAMPLES_TO_COLLECT)/num_threads;
   int to = ((slice+1)*SAMPLES_TO_COLLECT)/num_threads;
+  int i,j,k;
+  int rnum;
+  unsigned key;
+  sample *s;
 
   // process streams starting with different initial numbers
   for (i=0; i<NUM_SEED_STREAMS; i++){
