@@ -46,7 +46,7 @@ class sample {
 // the element and key value here: element is "class sample" and
 // key value is "unsigned".  
 hash<sample,unsigned> h;
-void *thread(void *args);
+void thread(void *args);
  
 main (int argc, char* argv[]){
 
