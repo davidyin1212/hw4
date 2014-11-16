@@ -93,19 +93,19 @@ main (int argc, char* argv[]){
 
 void *thread (void * args) {
   int slice = *((int *)args);
-  int from = (slice*SAMPLES_TO_COLLECT)/num_threads;
-  int to = ((slice+1)*SAMPLES_TO_COLLECT)/num_threads;
+  int from = (slice*NUM_SEED_STREAMS)/num_threads;
+  int to = ((slice+1)*NUM_SEED_STREAMS)/num_threads;
   int i,j,k;
   int rnum;
   unsigned key;
   sample *s;
 
   // process streams starting with different initial numbers
-  for (i=0; i<NUM_SEED_STREAMS; i++){
+  for (i=from; i<to; i++){
     rnum = i;
 
     // collect a number of samples
-    for (j=from; j<to; j++){
+    for (j=0; j<SAMPLES_TO_COLLECT; j++){
 
       // skip a number of samples
       for (k=0; k<samples_to_skip; k++){
