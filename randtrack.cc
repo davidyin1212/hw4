@@ -92,7 +92,7 @@ main (int argc, char* argv[]){
 }
 
 void thread (void * args) {
-  int slice = *((int *)args)
+  int slice = *((int *)args);
   int from = (slice*SAMPLES_TO_COLLECT)/num_threads;
   int to = ((slice+1)*SAMPLES_TO_COLLECT)/num_threads;
   int i,j,k;
