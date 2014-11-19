@@ -25,6 +25,8 @@ template<class Ele, class Keytype> class hash {
   void print(FILE *f=stdout);
   void reset();
   void cleanup();
+  void lock_list(Keytype the_key);
+  void unlock_list(Keytype the_key);
 };
 
 template<class Ele, class Keytype> 
