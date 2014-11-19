@@ -100,7 +100,7 @@ hash<Ele,Keytype>::lock_list(Keytype the_key){
 
 template<class Ele, class Keytype> 
 void 
-hash<Ele,Keytype>::lock_list(Keytype the_key){
+hash<Ele,Keytype>::unlock_list(Keytype the_key){
   pthread_mutex_unlock(&mutex_list[HASH_INDEX(the_key,my_size_mask)]);
 }
 
