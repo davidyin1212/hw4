@@ -3,7 +3,7 @@
 #include <stdlib.h>
 
 #include "defs.h"
-#include "hash.h"
+#include "hash_listlevel_locks.h"
 #include "pthread.h"
 
 #define SAMPLES_TO_COLLECT   10000000
@@ -119,8 +119,6 @@ void *thread (void * args) {
       // force the sample to be within the range of 0..RAND_NUM_UPPER_BOUND-1
       key = rnum % RAND_NUM_UPPER_BOUND;
 
-      pthread_mutex_lock(&mutex_list[key]);
-
       // if this sample has not been counted before
       if (!(s = h.lookup(key))){
   
@@ -131,7 +129,6 @@ void *thread (void * args) {
 
       // increment the count for the sample
       s->count++;
-      pthread_mutex_unlock(&mutex_list[key]);
     }
   }
   return NULL;
