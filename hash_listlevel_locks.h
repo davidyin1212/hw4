@@ -17,7 +17,7 @@ template<class Ele, class Keytype> class hash {
   unsigned my_size_mask;
   list<Ele,Keytype> *entries;
   list<Ele,Keytype> *get_list(unsigned the_idx);
-  pthread_mutex_t mutex_list[my_size];
+  pthread_mutex_t *mutex_list;
 
  public:
   void setup(unsigned the_size_log=5);
