@@ -93,9 +93,9 @@ main (int argc, char* argv[]){
 
   sample *s;
   sample *st;
-  for (int i=0; i<RAND_NUM_UPPER_BOUND; i++) {
+  for (int j = 0; j < num_threads; j++) {
+    for (int i=0; i<RAND_NUM_UPPER_BOUND; i++) {
     // if this sample has not been counted before
-    for (int j = 0; j < num_threads; j++) {
       if ((st = thread_hashes[j].lookup(i))) {
         if (!(s = h.lookup(i))){
           // insert a new element for it into the hash table
