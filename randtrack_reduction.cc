@@ -79,7 +79,7 @@ main (int argc, char* argv[]){
   // initialize a 16K-entry (2**14) hash of empty lists
   h.setup(14);
   for (int i = 0; i < num_threads; i++) {
-    thread_hashes[i].setup(4/num_threads);
+    thread_hashes[i].setup(14);
   }
 
   for (int i = 0; i < num_threads; i++) {
