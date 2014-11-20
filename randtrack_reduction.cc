@@ -48,7 +48,8 @@ class sample {
 // key value is "unsigned".  
 hash<sample,unsigned> h;
 void *thread(void *args);
- 
+hash<sample,unsigned> *thread_hashes;
+
 main (int argc, char* argv[]){
 
   // Print out team information
@@ -72,7 +73,7 @@ main (int argc, char* argv[]){
   sscanf(argv[2], " %d", &samples_to_skip);
 
   pthread_t thrd[num_threads];
-  hash<sample,unsigned> thread_hashes[num_threads];
+  hash<sample,unsigned> thread_hashes = new hash<sample,unsigned>[num_threads];
   int index[num_threads];
   
   // initialize a 16K-entry (2**14) hash of empty lists
