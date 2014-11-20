@@ -2,7 +2,8 @@
 CC = g++-4.7
 CFLAGS = -O3
 
-all: randtrack 
+all: randtrack randtrack_global_lock randtrack_tm randtrack_list_lock randtrack_element_lock randtrack_reduction
+p0: randtrack
 p1: randtrack_global_lock
 p2: randtrack_tm
 p3: randtrack_list_lock
