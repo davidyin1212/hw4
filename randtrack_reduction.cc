@@ -73,7 +73,7 @@ main (int argc, char* argv[]){
   sscanf(argv[2], " %d", &samples_to_skip);
 
   pthread_t thrd[num_threads];
-  hash<sample,unsigned> thread_hashes = new *hash<sample,unsigned>[num_threads];
+  thread_hashes = new hash<sample,unsigned>[num_threads];
   int index[num_threads];
   
   // initialize a 16K-entry (2**14) hash of empty lists
